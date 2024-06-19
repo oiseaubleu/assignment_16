@@ -34,6 +34,15 @@ class TasksController < ApplicationController
       render :edit
     end
   end
+
+
+  def destroy
+    @task.destroy 
+      flash[:info] = 'Task was successfully destroyed.'
+       redirect_to tasks_path
+  end
+
+
   private
       def set_task
         @task = Task.find(params[:id])
