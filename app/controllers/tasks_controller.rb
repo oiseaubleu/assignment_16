@@ -13,7 +13,7 @@ class TasksController < ApplicationController
     @task = Task.new(task_params) #インスタンスの作成   
       if @task.save 
         flash[:info] = 'Task was successfully created.' 
-        redirect_to @task
+        redirect_to tasks_path #一覧画面へ
       else
         render :new
       end
@@ -29,7 +29,7 @@ class TasksController < ApplicationController
   def update
     if @task.update(task_params)
       flash[:info] = 'Task was successfully updated.'
-      redirect_to tasks_path
+      redirect_to @task #詳細画面へ
     else
       render :edit
     end
