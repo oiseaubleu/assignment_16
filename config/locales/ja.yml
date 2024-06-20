@@ -30,13 +30,17 @@ ja:
     destroy: 削除
     back: 戻る
     confirm_destroy: 本当に削除してもよろしいですか？
+    tasksindex: タスク一覧
+    newtask: タスクを登録する
   tasks:
     index:
       title: タスク一覧ページ
     new:
       title: タスク登録ページ
+      butname: 登録する
     edit:
       title: タスク編集ページ
+      butname: 更新する
     show:
       title: タスク詳細ページ
     create:
