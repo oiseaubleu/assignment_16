@@ -31,7 +31,7 @@ class TasksController < ApplicationController
       flash[:notice] = 'Task was successfully updated.'
       redirect_to @task #詳細画面へ
     else
-      redirect_to edit_task_path(@task) ##特に意味もなくredirectにしてるだけ。
+      render :edit
     end
   end
 
