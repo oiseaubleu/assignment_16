@@ -10,6 +10,16 @@
   </head>
 
   <body>
+      <% flash.each do |key, value| %>
+      <%= content_tag(:div, value, class: "#{key}") %>
+    <% end %>
+    
+      <ul>
+      <li><%= link_to t('common.Tasks Index'), tasks_path,id:'tasks-index' %></li>
+      <li><%= link_to t('common.New Task'), new_task_path,id:'new-task'%></li>
+      </ul>
+
     <%= yield %>
   </body>
 </html>
+
