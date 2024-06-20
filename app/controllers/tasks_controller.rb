@@ -28,10 +28,10 @@ class TasksController < ApplicationController
 
   def update
     if @task.update(task_params)
-      flash[:info] = 'Task was successfully updated.'
+      flash[:notice] = 'Task was successfully updated.'
       redirect_to @task #詳細画面へ
     else
-      redirect_to edit_task_path(@task)
+      redirect_to edit_task_path(@task) ##特に意味もなくredirectにしてるだけ。
     end
   end
 
