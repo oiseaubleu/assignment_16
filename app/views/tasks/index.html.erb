@@ -6,8 +6,8 @@
       <th><%= Task.human_attribute_name(:title) %></th>
       <th><%= Task.human_attribute_name(:content) %></th>
       <th><%= Task.human_attribute_name(:created_at) %></th>
-      <th><%= Task.human_attribute_name(:deadline_on) %></th>
-      <th><%= Task.human_attribute_name(:priority) %></th>
+      <th><%= link_to Task.human_attribute_name(:deadline_on), sort_deadline_on: true %></th>
+      <th><%= link_to Task.human_attribute_name(:priority), sort_priority: true %></th>
       <th><%= Task.human_attribute_name(:status) %></th>
       
       <th colspan="7"></th>
