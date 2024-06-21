@@ -5,7 +5,7 @@ class TasksController < ApplicationController
     if params[:sort_deadline_on]
       @tasks =Task.all.order(deadline_on: "ASC").page(params[:page])
     elsif params[:sort_priority]
-      @tasks =Task.all.order(priority: "DESC").page(params[:page])
+      @tasks =Task.all.order(priority: :desc, created_at: :desc).page(params[:page])
     else
       @tasks = Task.all.order(created_at: "DESC").page(params[:page])
     end
