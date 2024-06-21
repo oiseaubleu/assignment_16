@@ -50,7 +50,7 @@ class TasksController < ApplicationController
   
       # コンテンツしか受け入れないようにするストロングパラメータ {"content"=>"xxx"}みたいな戻り値
       def task_params
-        params.require(:task).permit(:title,:content)
+        params.require(:task).permit(:title,:content,:deadline_on,:priority,:status)
       end
 
 

@@ -8,6 +8,17 @@ ja:
         title: タイトル
         content: 内容
         created_at: 作成日時
+        deadline_on: 終了期限
+        priority: 優先度
+        status: ステータス
+      task/priority:
+        low: 低
+        middle: 中
+        high: 高
+      task/status:
+        waiting: 未着手
+        working: 着手中
+        completed: 完了
       user:
         name: 名前
         email: メールアドレス
