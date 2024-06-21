@@ -14,20 +14,40 @@ RSpec.describe 'タスク管理機能', type: :system do
   end
 
   describe '一覧表示機能' do
-    context '一覧画面に遷移した場合' do
-      it '登録済みのタスク一覧が表示される' do
-         # テストで使用するためのタスクを登録
-         #Task.create!(title: '書類作成', content: '企画書を作成する。')
-         FactoryBot.create(:task)
-         FactoryBot.create(:second_task)
-         # タスク一覧画面に遷移
-         visit tasks_path
+    let!(:first_task) {FactoryBot.create(:task, content: "content1", created_at: Time.zone.now)}
+    let!(:second_task) {FactoryBot.create(:second_task,content: "content2", created_at: 1.day.from_now)}
+    let!(:third_task) {FactoryBot.create(:second_task,content: "content3", created_at: 1.day.ago)}         
+    before do
+      visit tasks_path
+    end
+    context '一覧画面に遷移した場合' do               
+      it '登録済みのタスク一覧が作成日時の降順で表示される' do
          # visit（遷移）したpage（この場合、タスク一覧画面）に"書類作成"という文字列が、have_content（含まれていること）をexpect（確認・期待）する
          expect(page).to have_content '書類作成'
          expect(page).to have_content 'メール送信'
-         # expectの結果が「真」であれば成功、「偽」であれば失敗としてテスト結果が出力される
+
+        #  within ".tasks" do
+        #   task_contents = all(".task-content").map(&:text)
+        #   expect(task_contents).to eq %w(content2 content1 content3)
+        # end
+        tasks = all('tbody tr')
+        #binding.irb
+        expect(tasks[0].text).to include('content2')
+        expect(tasks[1].text).to include('content1')
+        expect(tasks[2].text).to include('content3')
+        
+    
+    end
+
+    context '新たにタスクを作成した場合' do
+      it '新しいタスクが一番上に表示される' do
+        
+        tasks = all('tbody tr')
+        expect(tasks[0].text).to include('content2')
+
       end
     end
+
   end
 
   describe '詳細表示機能' do
@@ -43,4 +63,7 @@ RSpec.describe 'タスク管理機能', type: :system do
        end
      end
   end
+end
+
+
 end
