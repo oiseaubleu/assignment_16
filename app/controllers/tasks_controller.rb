@@ -5,36 +5,6 @@ class TasksController < ApplicationController
     @search_params = search_params
     #binding.irb
     @tasks = Task.search(@search_params,params[:sort_deadline_on],params[:sort_priority]).page(params[:page])
- 
-
- 
-    # if @search_params.nil?
-    #   if params[:sort_deadline_on]
-    #     @tasks =Task.latest_deadline.page(params[:page])
-    #   elsif params[:sort_priority]
-    #     @tasks =Task.highest_priority.page(params[:page])
-    #   else
-    #     @tasks = Task.all.order(created_at: "DESC").page(params[:page])
-    #   end
-    # else
-    #   ##ここどうにかする
-    #   @tasks = Task.search(@search_params).page(params[:page])
-    #     # if params[:sort_deadline_on]
-    #     #   @tasks =Task.latest_deadline.page(params[:page])
-    #     # elsif params[:sort_priority]
-    #     #   @tasks =Task.highest_priority.page(params[:page])
-    #     # else
-    #     #   @tasks = Task.all.order(created_at: "DESC").page(params[:page])
-    #     # end
-    # end
-
-    # if params[:sort_deadline_on]
-    #   @tasks =Task.latest_deadline.page(params[:page])
-    # elsif params[:sort_priority]
-    #   @tasks =Task.highest_priority.page(params[:page])
-    # else
-    #   @tasks = Task.all.order(created_at: "DESC").page(params[:page])
-    # end
   end
 
   def new
