@@ -4,8 +4,10 @@ class TasksController < ApplicationController
   def index
     @search_params = search_params
     #binding.irb
-    @tasks = Task.search(@search_params,params[:sort_deadline_on],params[:sort_priority],params[:query]).page(params[:page])
-    
+    @tasks = Task.search(@search_params,params[:sort_deadline_on],params[:sort_priority]).page(params[:page])
+ 
+
+ 
     # if @search_params.nil?
     #   if params[:sort_deadline_on]
     #     @tasks =Task.latest_deadline.page(params[:page])

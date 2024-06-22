@@ -27,8 +27,8 @@
       <th><%= Task.human_attribute_name(:title) %></th>
       <th><%= Task.human_attribute_name(:content) %></th>
       <th><%= Task.human_attribute_name(:created_at) %></th>
-      <th><%= link_to Task.human_attribute_name(:deadline_on), sort_deadline_on: true, query: params[:query] %></th>
-      <th><%= link_to Task.human_attribute_name(:priority), sort_priority: true %></th>
+      <th><%= link_to Task.human_attribute_name(:deadline_on), sort_deadline_on: true,search: @search_params %></th>
+      <th><%= link_to Task.human_attribute_name(:priority), sort_priority: true,search: @search_params %></th>
       <th><%= Task.human_attribute_name(:status) %></th>
       
       <th colspan="7"></th>
