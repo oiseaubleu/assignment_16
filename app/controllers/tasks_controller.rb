@@ -2,10 +2,33 @@ class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
 
   def index
+    @search_params = search_params
+    #binding.irb
+    
+    if @search_params.nil?
+      if params[:sort_deadline_on]
+        @tasks =Task.latest_deadline.page(params[:page])
+      elsif params[:sort_priority]
+        @tasks =Task.highest_priority.page(params[:page])
+      else
+        @tasks = Task.all.order(created_at: "DESC").page(params[:page])
+      end
+    else
+      ##ここどうにかする
+      @tasks = Task.search(@search_params)
+        if params[:sort_deadline_on]
+          @tasks =Task.latest_deadline.page(params[:page])
+        elsif params[:sort_priority]
+          @tasks =Task.highest_priority.page(params[:page])
+        else
+          @tasks = Task.all.order(created_at: "DESC").page(params[:page])
+        end
+    end
+
     if params[:sort_deadline_on]
-      @tasks =Task.all.order(deadline_on: "ASC").page(params[:page])
+      @tasks =Task.latest_deadline.page(params[:page])
     elsif params[:sort_priority]
-      @tasks =Task.all.order(priority: :desc, created_at: :desc).page(params[:page])
+      @tasks =Task.highest_priority.page(params[:page])
     else
       @tasks = Task.all.order(created_at: "DESC").page(params[:page])
     end
@@ -59,7 +82,9 @@ class TasksController < ApplicationController
         params.require(:task).permit(:title,:content,:deadline_on,:priority,:status)
       end
 
-
+      def search_params
+        params.fetch(:search, {}).permit(:title,:status)
+      end
 
 
 

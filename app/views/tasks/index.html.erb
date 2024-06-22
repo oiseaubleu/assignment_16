@@ -1,5 +1,26 @@
 <h1><%= t('.title') %></h1>
 
+
+<div class="search-form">
+  <%= form_with(scope: :search, url: tasks_path, method: :get, local: true) do |f| %>
+    <div class="field">
+      <%= f.label(:status, Task.human_attribute_name(:status)) %>
+      <%= f.select :status, Task.enum_options_for_select(:status) , {include_blank: ''},selected: @search_params[:status] %>
+    </div>
+
+    <div class="field">
+      <%= f.label(:title, Task.human_attribute_name(:title)) %>
+      <%= f.text_field :title, value: @search_params[:title] %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit t('helpers.submit.search'), id:'search_task' %>
+    </div>
+  <% end %>
+</div>
+
+
+
 <table>
   <thead>
     <tr>
