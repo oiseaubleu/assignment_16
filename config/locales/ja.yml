@@ -61,3 +61,20 @@ ja:
       updated: タスクを更新しました
     destroy:
       destroyed: タスクを削除しました
+  users:
+    index:
+      title: 多分つかわない
+    new:
+      title: アカウント登録ページ
+      butname: 登録する
+    edit:
+      title: アカウント編集ページ
+      butname: 更新する
+    show:
+      title: アカウント詳細ページ
+    create:
+      created: アカウントを登録しました
+    update:
+      updated: アカウントを更新しました
+    destroy:
+      destroyed: 多分つかわない
