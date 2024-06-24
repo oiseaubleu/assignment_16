@@ -78,3 +78,9 @@ ja:
       updated: アカウントを更新しました
     destroy:
       destroyed: 多分つかわない
+  sessions:
+    new:
+      title: ログインページ
+      butname: ログイン
+      email: メールアドレス
+      password: パスワード
