@@ -1,9 +1,14 @@
 class UsersController < ApplicationController
   before_action :correct_user, only: %i[show edit update destroy]
-  # skip_before_action :login_required, only: %i[new create]
+  skip_before_action :login_required, only: %i[new create]
 
   def new
-    @user = User.new
+    if logged_in? == false
+      @user = User.new
+    else
+      flash[:info] = 'ログアウトしてください'
+      redirect_to tasks_path(current_user.id)
+    end
   end
 
   def create
@@ -11,9 +16,9 @@ class UsersController < ApplicationController
     if @user.save
       # ユーザ登録に成功した場合の処理
       flash[:info] = 'アカウントを登録しました'
-      # log_in(@user)
-      # redirect_to tasks_path(@user.id)
-      redirect_to user_path(@user.id)
+      log_in(@user)
+      redirect_to tasks_path(@user.id)
+      # redirect_to user_path(@user.id)
     else
       # ユーザ登録に失敗した場合の処理
       render :new
@@ -46,6 +51,10 @@ class UsersController < ApplicationController
 
   def correct_user
     @user = User.find(params[:id])
-    redirect_to current_user unless current_user?(@user)
+    # redirect_to current_user unless current_user?(@user)
+    return if current_user?(@user)
+
+    flash[:danger] = 'アクセス権限がありません'
+    redirect_to tasks_path(current_user.id)
   end
 end

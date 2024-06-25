@@ -44,6 +44,11 @@ ja:
     confirm_destroy: 本当に削除してもよろしいですか？
     tasksindex: タスク一覧
     newtask: タスクを登録する
+    account_setting: アカウント設定
+    sign_out: ログアウト
+    sign_up: アカウント登録
+    sign_in: ログイン
+
   tasks:
     index:
       title: タスク一覧ページ

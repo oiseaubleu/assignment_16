@@ -4,15 +4,19 @@ class TasksController < ApplicationController
   def index
     @search_params = search_params
     # binding.irb
-    @tasks = Task.search(@search_params, params[:sort_deadline_on], params[:sort_priority]).page(params[:page])
+    # @tasks = Task.search(@search_params, params[:sort_deadline_on], params[:sort_priority]).page(params[:page])
+    @tasks = current_user.tasks.search(@search_params, params[:sort_deadline_on],
+                                       params[:sort_priority]).page(params[:page])
   end
 
   def new
-    @task = Task.new
+    # @task = Task.new
+    @task = current_user.tasks.build
   end
 
   def create
-    @task = Task.new(task_params) # インスタンスの作成
+    # @task = Task.new(task_params) # インスタンスの作成
+    @task = current_user.tasks.build(task_params)
     if @task.save
       flash[:info] = t('.created')
       redirect_to tasks_path # 一覧画面へ
@@ -45,7 +49,8 @@ class TasksController < ApplicationController
   private
 
   def set_task
-    @task = Task.find(params[:id])
+    # @task = Task.find(params[:id])
+    @task = current_user.tasks.find(params[:id])
   end
 
   # コンテンツしか受け入れないようにするストロングパラメータ {"content"=>"xxx"}みたいな戻り値
