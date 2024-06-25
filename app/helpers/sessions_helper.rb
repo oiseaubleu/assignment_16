@@ -16,4 +16,16 @@ module SessionsHelper
   def current_user?(user)
     user == current_user
   end
+
+  # def current_user.admin?(user)
+  #   # redirect_to current_user unless current_user?(@user)
+  #   # if current_user.admin?
+  #   #   @user = User.find(params[:id])
+  #   # else
+  #   # binding.irb
+  #   return if current_user.admin?
+
+  #   flash[:danger] = '管理者以外アクセスできません'
+  #   redirect_to tasks_path(current_user.id)
+  # end
 end

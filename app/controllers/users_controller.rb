@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :correct_user, only: %i[show edit update destroy]
   skip_before_action :login_required, only: %i[new create]
-  skip_before_action :correct_admin
+  # skip_before_action :correct_admin
 
   def new
     if logged_in? == false
