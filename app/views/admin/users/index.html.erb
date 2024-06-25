@@ -1,0 +1,31 @@
+<h1><%= t('.title') %></h1>
+<%= link_to "管理者追加", new_admin_user_path %>
+<table class="table">
+  <thead>
+    <tr>
+      <th><%= User.human_attribute_name(:name) %></th>
+      <th><%= User.human_attribute_name(:email) %></th>
+      <th><%= User.human_attribute_name(:admin_role) %></th>
+      <th><%= User.human_attribute_name(:num_of_task) %></th>
+      
+    </tr>
+  </thead>
+  <tbody>
+
+  <% if @users %>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.name %></td>
+        <td><%= user.email %></td>
+        <td><%= User.human_attribute_name("admin.#{user.admin}")%></td>
+        <td><%= user.tasks.count %></td>
+        <td><%= link_to t('common.show'), task_path(user), class:"show-user" %></td>
+        <td><%= link_to t('common.edit'), edit_task_path(user), class:"edit-user" %></td>
+        <td><%= link_to t('common.destroy'), user, method: :delete, data:  { confirm: t('common.confirm_destroy')}, class:"destroy-user"%></td>
+      </tr>
+    <% end %>
+  <% else %>
+    ユーザーが自分以外いません
+  <% end %>
+  </tbody>
+</table>

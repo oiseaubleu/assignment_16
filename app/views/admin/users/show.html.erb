@@ -1,0 +1,20 @@
+<article class="media">
+  <figure class="media-left">
+    <p class="image is-64x64">
+      <img src="https://bulma.io/assets/images/placeholders/128x128.png" />
+    </p>
+  </figure>
+  <div class="media-content">
+    <div class="content">
+      <p>
+        <strong><%= @admin.email %></strong>
+        <br />
+        test
+      </p>
+    </div>
+  </div>
+  <%= link_to "編集", edit_admin_user_path(@admin), class: "button is-primary box" %>
+  <%= link_to "削除", admin_user_path(@admin), method: :delete, data: { confirm: "消していいですか" } ,class: "button is-basic box" %>
+  <%= link_to "戻る", admin_users_path, class: "button is-danger box" %>
+
+</article>

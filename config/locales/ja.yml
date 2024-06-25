@@ -24,6 +24,16 @@ ja:
         email: メールアドレス
         password: パスワード
         password_confirmation: パスワード（確認）
+        admin_role: 管理者権限
+        num_of_task: タスク数
+      user/admin:
+        true: あり
+        false: なし
+      # admin/users:
+      #   name: 名前
+      #   email: メールアドレス
+      #   password: パスワード
+      #   password_confirmation: パスワード（確認）
 
   errors:
     format: "%{message}"
@@ -48,6 +58,8 @@ ja:
     sign_out: ログアウト
     sign_up: アカウント登録
     sign_in: ログイン
+    true: あり
+    false: なし
 
   tasks:
     index:
@@ -89,3 +101,7 @@ ja:
       butname: ログイン
       email: メールアドレス
       password: パスワード
+  admin:
+    users:
+      index:
+        title: ユーザ一覧ページ
