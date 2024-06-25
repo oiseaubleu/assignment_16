@@ -1,1 +1,5 @@
-<%= render "form", { admin: @admin, destination: admin_user_path(@admin) } %>
+<h1><%= t('.title') %></h1>
+
+<%= render "form", { user: @user, butname:t('.butname'),id:'update-user',destination: admin_user_path(@user) } %>
+<%= link_to  t('common.back'), user_path(@user.id) ,id:'back'%>
+<%# ↑アカウント詳細画面に戻るリンク！！！ %>

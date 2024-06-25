@@ -1,20 +1,45 @@
-<article class="media">
-  <figure class="media-left">
-    <p class="image is-64x64">
-      <img src="https://bulma.io/assets/images/placeholders/128x128.png" />
-    </p>
-  </figure>
-  <div class="media-content">
-    <div class="content">
-      <p>
-        <strong><%= @admin.email %></strong>
-        <br />
-        test
-      </p>
-    </div>
-  </div>
-  <%= link_to "編集", edit_admin_user_path(@admin), class: "button is-primary box" %>
-  <%= link_to "削除", admin_user_path(@admin), method: :delete, data: { confirm: "消していいですか" } ,class: "button is-basic box" %>
-  <%= link_to "戻る", admin_users_path, class: "button is-danger box" %>
+<h1><%= t('.title') %></h1>
 
-</article>
+<p>
+  <strong><%= User.human_attribute_name(:name) %>:</strong>
+  <%= @user.name %>
+</p>
+
+<p>
+  <strong><%= User.human_attribute_name(:email) %>:</strong>
+  <%= @user.email %>
+</p>
+
+<p>
+<strong><%= User.human_attribute_name(:admin_role) %>:</strong>
+  <%= User.human_attribute_name("admin.#{@user.admin}")%>
+</p>
+
+<table>
+  <thead>
+    <tr>
+      <th><%= Task.human_attribute_name(:title) %></th>
+      <th><%= Task.human_attribute_name(:content) %></th>
+      <th><%= Task.human_attribute_name(:created_at) %></th>
+      <th><%= link_to Task.human_attribute_name(:deadline_on), sort_deadline_on: true,search: @search_params %></th>
+      <th><%= link_to Task.human_attribute_name(:priority), sort_priority: true,search: @search_params %></th>
+      <th><%= Task.human_attribute_name(:status) %></th>
+      
+      <th colspan="7"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @user.tasks.each do |task| %>
+      <tr>
+        <td><%= task.title %></td>
+        <td><%= task.content %></td>
+        <td><%= task.created_at.strftime('%Y/%m/%d %H:%M') %></td>
+        <td><%= task.deadline_on.strftime('%Y/%m/%d')  %></td>
+        <td><%= Task.enum_options_for_select(:priority).key(task.priority) %></td>
+        <td><%= Task.enum_options_for_select(:status).key(task.status) %></td>         
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= link_to  t('common.back'), user_path(@user.id) ,id:'back'%>

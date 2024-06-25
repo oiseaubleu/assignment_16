@@ -19,6 +19,7 @@ ja:
         waiting: 未着手
         working: 着手中
         completed: 完了
+
       user:
         name: 名前
         email: メールアドレス
@@ -29,9 +30,10 @@ ja:
       user/admin:
         true: あり
         false: なし
+
       # admin/users:
-      #   name: 名前
-      #   email: メールアドレス
+      #   #   name: 名前
+      #   email: メールアドレス??
       #   password: パスワード
       #   password_confirmation: パスワード（確認）
 
@@ -105,3 +107,11 @@ ja:
     users:
       index:
         title: ユーザ一覧ページ
+      new:
+        title: ユーザ登録ページ
+        butname: 登録する
+      edit:
+        title: ユーザ編集ページ
+        butname: 更新する
+      show:
+        title: ユーザ詳細ページ

@@ -1,41 +1,40 @@
-<%= form_with(model: admin, url: destination) do |f| %>
-  <% if admin.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(admin.errors.count, "error") %> prohibited this admin from being saved:</h2>
-
-      <ul>
-        <% admin.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
+<%= form_with(model: user, url: destination) do |f| %>
+  
   <div class="field">
-    <%= f.label :email, class: "label" %>
-    <div class="control">
-      <%= f.text_field :email, class: "input" %>
-    </div>
+    <%= f.label :name %>
+    <div> </div>
+    <%= f.text_field :name %>
   </div>
 
   <div class="field">
-    <%= f.label :password, class: "label" %>
-    <div class="control">
-      <%= f.password_field :password, class: "input" %>
-    </div>
+    <%= f.label :email %>
+    <div> </div>
+    <%= f.email_field :email %>
   </div>
 
   <div class="field">
-    <%= f.label :password_confirmation, class: "label" %>
-    <div class="control">
-      <%= f.password_field :password_confirmation, class: "input" %>
-    </div>
+    <%= f.label :password %>
+    <div> </div>
+    <%= f.password_field :password %>
   </div>
 
   <div class="field">
-    <div class="control">
-      <%= f.submit class: "button is-primary" %>
-    </div>
+    <%= f.label :password_confirmation %>
+    <div> </div>
+    <%= f.password_field :password_confirmation %>
+  </div>
+
+  <div class="field">
+    <%= f.label :admin_role %>
+    <div> </div>
+     <%= f.check_box :admin, id: :admin_role,:as => :boolean%>
+  </div>
+
+  <div> </div>
+  <div class="actions">
+    <%= f.submit butname, id:id %>
   </div>
 
 <% end %>
+
+
