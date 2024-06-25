@@ -1,6 +1,7 @@
 class Admin::UsersController < ApplicationController
   # before_action :set_admin, only: %i[show edit update destroy]
-  before_action :correct_user, only: %i[show edit update destroy]
+  # before_action :correct_admin # , only: %i[show edit update destroy]
+  before_action :set_user, only: %i[show edit update destroy]
   skip_before_action :login_required, only: %i[new create]
   # OK
   def index
@@ -26,7 +27,8 @@ class Admin::UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
-      redirect_to admin_user_path(@user), notice: 'admin was successfully created.'
+      flash[:info] = 'ユーザを登録しました'
+      redirect_to admin_users_path
     else
       render :new
     end
@@ -47,16 +49,8 @@ class Admin::UsersController < ApplicationController
 
   private
 
-  # def set_admin
-  #   @admin = Admin.find(params[:id])
-  # end
-  def correct_user
+  def set_user
     @user = User.find(params[:id])
-    # redirect_to current_user unless current_user?(@user)
-    return if current_user?(@user)
-
-    flash[:danger] = 'アクセス権限がありません'
-    redirect_to tasks_path(current_user.id)
   end
 
   def user_params
