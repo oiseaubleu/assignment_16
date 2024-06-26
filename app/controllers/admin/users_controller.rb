@@ -44,9 +44,16 @@ class Admin::UsersController < ApplicationController
   end
 
   def destroy
-    @user.destroy
-    flash[:info] = 'ユーザを削除しました'
-    redirect_to admin_users_url
+    if @user.destroy
+      flash[:info] = 'ユーザを削除しました'
+      redirect_to admin_users_url
+    else
+      # binding.irb
+      # flash[:info] = 'ユーザを削除してないです！'
+      @users = User.all.includes(:tasks)
+      response.headers['Location'] = admin_users_path
+      render :index
+    end
   end
 
   private
