@@ -36,15 +36,17 @@ class Admin::UsersController < ApplicationController
 
   def update
     if @user.update(user_params)
-      redirect_to admin_user_path(@user), notice: 'admin was successfully updated.'
+      flash[:info] = 'ユーザを更新しました'
+      redirect_to admin_users_path
     else
       render :edit
     end
   end
 
   def destroy
-    @admin.destroy
-    redirect_to admin_users_url, notice: 'admin was successfully destroyed.'
+    @user.destroy
+    flash[:info] = 'ユーザを削除しました'
+    redirect_to admin_users_url
   end
 
   private
