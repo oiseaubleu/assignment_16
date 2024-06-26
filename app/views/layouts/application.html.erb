@@ -16,6 +16,10 @@
 
     <% if logged_in? %>
       <ul>
+      <%if current_user.admin? %>
+      <li><%= link_to t('common.usersindex'), admin_users_path,id:'users-index' %></li>
+      <li><%= link_to t('common.adduser'), new_admin_user_path,id:'add-user' %></li>
+      <%end %>
       <li><%= link_to t('common.tasksindex'), tasks_path(current_user.id),id:'tasks-index' %></li>
       <li><%= link_to t('common.newtask'), new_task_path(current_user.id),id:'new-task'%></li>
       <li ><%= link_to t('common.account_setting'), user_path(current_user.id),id:"account-setting" %></li>
@@ -27,9 +31,6 @@
       <li ><%= link_to t('common.sign_in'), new_session_path,id:"sign-in" %></li>
       </ul>
     <% end %>
-
-
-
 
 
 
