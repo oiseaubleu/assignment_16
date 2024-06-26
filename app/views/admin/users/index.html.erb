@@ -13,7 +13,8 @@
   <tbody>
 
   <% if @users %>
-    <% @users.each do |user| %>
+  <% users = @users.includes(:tasks) %>
+    <% users.each do |user| %>
       <tr>
         <td><%= user.name %></td>
         <td><%= user.email %></td>
