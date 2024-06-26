@@ -71,7 +71,7 @@ class UsersController < ApplicationController
     # redirect_to current_user unless current_user?(@user)
     return if current_user?(@user)
 
-    flash[:danger] = 'アクセス権限がありません'
-    redirect_to tasks_path(current_user.id)
+    # flash.now[:danger] = 'アクセス権限がありません'
+    redirect_to tasks_path(current_user.id), notice: 'アクセス権限がありません'
   end
 end

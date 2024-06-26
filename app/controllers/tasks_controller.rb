@@ -1,6 +1,7 @@
 class TasksController < ApplicationController
   before_action :set_task, only: %i[show edit update destroy]
-
+  ####################
+  # before_action :correct_user, only: %i[show edit update destroy]
   def index
     @search_params = search_params
     # binding.irb
@@ -50,7 +51,13 @@ class TasksController < ApplicationController
 
   def set_task
     # @task = Task.find(params[:id])
-    @task = current_user.tasks.find(params[:id])
+    # もとはこれだけ@task = current_user.tasks.find(params[:id])
+    @task = current_user.tasks.find_by(id: params[:id])
+    if @task
+    else
+      flash[:danger] = 'アクセス権限がありません'
+      redirect_to tasks_path(current_user.id)
+    end
   end
 
   # コンテンツしか受け入れないようにするストロングパラメータ {"content"=>"xxx"}みたいな戻り値
@@ -61,4 +68,14 @@ class TasksController < ApplicationController
   def search_params
     params.fetch(:search, {}).permit(:title, :status)
   end
+
+  # def correct_user
+  #   return true
+
+  #   flash.now[:danger] = 'アクセス権限がありません'
+  #   redirect_to tasks_path(current_user.id)
+
+  #   # redirect_to tasks_path(current_user.id)
+  #   # return true if current_user?(self)
+  # end
 end
