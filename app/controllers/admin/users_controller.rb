@@ -2,7 +2,7 @@ class Admin::UsersController < ApplicationController
   # before_action :set_admin, only: %i[show edit update destroy]
   before_action :correct_admin # , only: %i[show edit update destroy]
   before_action :set_user, only: %i[show edit update destroy]
-  skip_before_action :login_required, only: %i[new create]
+  # skip_before_action :login_required, only: %i[new create]
   # OK
   def index
     @users = User.all.includes(:tasks)
