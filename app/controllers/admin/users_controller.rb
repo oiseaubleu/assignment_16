@@ -35,7 +35,10 @@ class Admin::UsersController < ApplicationController
   end
 
   def update
+    # binding.irb
+
     if @user.update(user_params)
+
       flash[:info] = 'ユーザを更新しました'
       redirect_to admin_users_path
     else
@@ -51,7 +54,7 @@ class Admin::UsersController < ApplicationController
       # binding.irb
       # flash[:info] = 'ユーザを削除してないです！'
       @users = User.all.includes(:tasks)
-      response.headers['Location'] = admin_users_path
+      # response.headers['Location'] = admin_users_path
       render :index
     end
   end
