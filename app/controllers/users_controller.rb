@@ -27,7 +27,7 @@ class UsersController < ApplicationController
       # ユーザ登録に成功した場合の処理
       flash[:info] = 'アカウントを登録しました'
       log_in(@user)
-      redirect_to tasks_path(@user.id)
+      redirect_to tasks_path # (@user.id)
 
     else
       # ユーザ登録に失敗した場合の処理
