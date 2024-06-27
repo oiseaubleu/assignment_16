@@ -4,14 +4,14 @@ RSpec.describe 'ユーザモデル機能', type: :model do
   describe 'バリデーションのテスト' do
     context 'ユーザの名前が空文字の場合' do
       it 'バリデーションに失敗する' do
-        user = User.create(name: '', email: 'test@aaa.aa', password_digest: '123456', admin: false)
+        user = User.create(name: '', email: 'test@aaa.aa', password: '123456', admin: false)
         expect(user).not_to be_valid
       end
     end
 
     context 'ユーザのメールアドレスが空文字の場合' do
       it 'バリデーションに失敗する' do
-        user = User.create(name: 'test', email: '', password_digest: '123456', admin: false)
+        user = User.create(name: 'test', email: '', password: '123456', admin: false)
         expect(user).not_to be_valid
       end
     end
