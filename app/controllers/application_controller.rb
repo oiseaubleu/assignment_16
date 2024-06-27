@@ -28,6 +28,7 @@ class ApplicationController < ActionController::Base
     if request.format.to_sym == :json
       render json: { error: '404 Not Found' }, status: :not_found
     else
+      @error_code = 404
       render 'errors/404.html', status: :not_found, layout: 'error'
     end
   end
@@ -38,6 +39,7 @@ class ApplicationController < ActionController::Base
     if request.format.to_sym == :json
       render json: { error: '500 Internal Server Error' }, status: :internal_server_error
     else
+      @error_code = 500
       render 'errors/500.html', status: :internal_server_error, layout: 'error'
     end
   end
