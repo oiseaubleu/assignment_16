@@ -41,11 +41,12 @@ class LabelsController < ApplicationController
     end
   end
 
-  # # DELETE /tasks/1
-  # def destroy
-  #   @task.destroy
-  #   redirect_to tasks_url, notice: 'Task was successfully destroyed.'
-  # end
+  # DELETE /tasks/1
+  def destroy
+    @label.destroy
+    flash[:info] = 'ラベルを削除しました'
+    redirect_to labels_path
+  end
 
   private
 
