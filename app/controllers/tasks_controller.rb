@@ -53,6 +53,9 @@ class TasksController < ApplicationController
     # @task = Task.find(params[:id])
     # もとはこれだけ@task = current_user.tasks.find(params[:id])
     @task = current_user.tasks.find_by(id: params[:id])
+    ###################################
+    # if @task　いらない　unless @taskでいい
+    ####################################
     if @task
     else
       flash[:danger] = 'アクセス権限がありません'
