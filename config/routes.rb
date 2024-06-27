@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     resources :users
   end
   resources :sessions, only: %i[new create destroy]
+  resources :labels, only: %i[new create show edit update destroy index]
   get '*not_found' => 'application#routing_error'
   post '*not_found' => 'application#routing_error'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
