@@ -78,6 +78,6 @@ class Admin::UsersController < ApplicationController
     return if current_user.admin?
 
     flash[:danger] = '管理者以外アクセスできません'
-    redirect_to tasks_path(current_user.id)
+    redirect_to tasks_path # (current_user.id)
   end
 end
