@@ -1,6 +1,5 @@
 class Task < ApplicationRecord
-  has_many :labels
-  has_many :users, through: :labels
+  belongs_to :user
   validates :title, :content, :deadline_on, :priority, :status, presence: true
   enum priority: %i[low middle high]
   enum status: %i[waiting working completed]
