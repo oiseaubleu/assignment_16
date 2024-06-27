@@ -69,7 +69,7 @@ class TasksController < ApplicationController
   end
 
   def search_params
-    params.fetch(:search, {}).permit(:title, :status)
+    params.fetch(:search, {}).permit(:title, :status, :label)
   end
 
   # def correct_user
