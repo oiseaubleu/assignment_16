@@ -1,22 +1,33 @@
 require 'rails_helper'
 
 RSpec.describe 'タスク管理機能', type: :system do
+  # ユーザのテストデータを作成
+  let!(:user) { FactoryBot.create(:user) }
+  before do
+    visit new_session_path
+    find('input[name="session[email]"]').set(user.email)
+    find('input[name="session[password]"]').set(user.password)
+    click_button 'ログイン'
+  end
+  ######################################
   describe '登録機能' do
     context 'タスクを登録した場合' do
       it '登録したタスクが表示される' do
         # Task.create!(title: '書類作成', content: '企画書を作成する。')
-        FactoryBot.create(:task)
+        FactoryBot.create(:task, content: 'content1', created_at: Time.zone.now, user_id: user.id)
         visit tasks_path
-        expect(page).to have_content '書類作成'
+        expect(page).to have_content 'content1'
         # expectの結果が「真」であれば成功、「偽」であれば失敗としてテスト結果が出力される
       end
     end
   end
 
   describe '一覧表示機能' do
-    let!(:first_task) { FactoryBot.create(:task, content: 'content1', created_at: Time.zone.now) }
-    let!(:second_task) { FactoryBot.create(:second_task, content: 'content2', created_at: 1.day.from_now) }
-    let!(:third_task) { FactoryBot.create(:third_task, content: 'content3', created_at: 1.day.ago) }
+    let!(:first_task) { FactoryBot.create(:task, content: 'content1', created_at: Time.zone.now, user_id: user.id) }
+    let!(:second_task) do
+      FactoryBot.create(:second_task, content: 'content2', created_at: 1.day.from_now, user_id: user.id)
+    end
+    let!(:third_task) { FactoryBot.create(:third_task, content: 'content3', created_at: 1.day.ago, user_id: user.id) }
 
     before do
       visit tasks_path
@@ -107,11 +118,11 @@ RSpec.describe 'タスク管理機能', type: :system do
       context '任意のタスク詳細画面に遷移した場合' do
         it 'そのタスクの内容が表示される' do
           # テストで使用するためのタスクを登録
-          # task = Task.create!(title: 'タスク詳細', content: '企画書を作成する。')
-          task = FactoryBot.create(:task)
+
+          task = FactoryBot.create(:task, content: 'content1', created_at: Time.zone.now, user_id: user.id)
           visit task_path(task)
           # visit（遷移）したpage（この場合、タスク一覧画面）に"書類作成"という文字列が、have_content（含まれていること）をexpect（確認・期待）する
-          expect(page).to have_content '書類作成'
+          expect(page).to have_content 'content1'
           # expectの結果が「真」であれば成功、「偽」であれば失敗としてテスト結果が出力される
         end
       end
