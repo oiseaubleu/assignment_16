@@ -22,6 +22,14 @@
       <%end %>
       <li><%= link_to t('common.tasksindex'), tasks_path(current_user.id),id:'tasks-index' %></li>
       <li><%= link_to t('common.newtask'), new_task_path(current_user.id),id:'new-task'%></li>
+
+
+      <li><%= link_to 'ラベル一覧', labels_path(current_user.id),id:'labels-index' %></li>
+      <li><%= link_to 'ラベルを登録する', new_label_path(current_user.id),id:'new-label'%></li>
+
+
+
+      
       <li ><%= link_to t('common.account_setting'), user_path(current_user.id),id:"account-setting" %></li>
       <li ><%= link_to t('common.sign_out'), session_path(current_user.id), method: :delete, id:"sign-out"%></li>
       </ul>
