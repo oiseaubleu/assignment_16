@@ -1,5 +1,5 @@
 class LabelsController < ApplicationController
-  # before_action :set_task, only: [:show, :edit, :update, :destroy]
+  before_action :set_label, only: %i[show edit update destroy]
 
   # GET /tasks
   def index
@@ -15,9 +15,9 @@ class LabelsController < ApplicationController
     @label = Label.new
   end
 
-  # # GET /tasks/1/edit
-  # def edit
-  # end
+  # GET /tasks/1/edit
+  def edit
+  end
 
   # POST /tasks
   def create
@@ -31,14 +31,15 @@ class LabelsController < ApplicationController
     end
   end
 
-  # # PATCH/PUT /tasks/1
-  # def update
-  #   if @task.update(task_params)
-  #     redirect_to @task, notice: 'Task was successfully updated.'
-  #   else
-  #     render :edit
-  #   end
-  # end
+  # PATCH/PUT /tasks/1
+  def update
+    if @label.update(label_params)
+      flash[:info] = 'ラベルを更新しました'
+      redirect_to labels_path
+    else
+      render :edit
+    end
+  end
 
   # # DELETE /tasks/1
   # def destroy
@@ -49,9 +50,9 @@ class LabelsController < ApplicationController
   private
 
   # Use callbacks to share common setup or constraints between actions.
-  # def set_task
-  #   @task = Task.find(params[:id])
-  # end
+  def set_label
+    @label = Label.find(params[:id])
+  end
 
   # Only allow a trusted parameter "white list" through.
   def label_params
