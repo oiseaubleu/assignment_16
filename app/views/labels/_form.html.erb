@@ -1,0 +1,15 @@
+
+<%= form_with(model: label, local: true) do |f| %>
+
+
+  <div class="field">
+  <%= f.label '名前' %>
+ <div> </div>
+  <%= f.text_field :name %>
+  </div>
+
+  <div> </div>
+  <div class="actions">
+    <%= f.submit butname%>
+  </div>
+<% end %>

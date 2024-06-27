@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   include SessionsHelper
   before_action :login_required
   # #カスタムエラーのため追加
-  unless Rails.env.production? # Rails.env.development?
+  unless Rails.env.development? # Rails.env.production?
     rescue_from Exception,                      with: :_render_500
     rescue_from ActiveRecord::RecordNotFound,   with: :_render_404
     rescue_from ActionController::RoutingError, with: :_render_404

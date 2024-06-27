@@ -10,25 +10,26 @@ class LabelsController < ApplicationController
   # def show
   # end
 
-  # # GET /tasks/new
-  # def new
-  #   @task = Task.new
-  # end
+  # GET /tasks/new
+  def new
+    @label = Label.new
+  end
 
   # # GET /tasks/1/edit
   # def edit
   # end
 
-  # # POST /tasks
-  # def create
-  #   @task = Task.new(task_params)
+  # POST /tasks
+  def create
+    @label = Label.new(label_params)
 
-  #   if @task.save
-  #     redirect_to @task, notice: 'Task was successfully created.'
-  #   else
-  #     render :new
-  #   end
-  # end
+    if @label.save
+      flash[:info] = 'ラベルを登録しました'
+      redirect_to labels_path
+    else
+      render :new
+    end
+  end
 
   # # PATCH/PUT /tasks/1
   # def update
@@ -45,14 +46,15 @@ class LabelsController < ApplicationController
   #   redirect_to tasks_url, notice: 'Task was successfully destroyed.'
   # end
 
-  # private
-  #   # Use callbacks to share common setup or constraints between actions.
-  #   def set_task
-  #     @task = Task.find(params[:id])
-  #   end
+  private
 
-  #   # Only allow a trusted parameter "white list" through.
-  #   def task_params
-  #     params.require(:task).permit(:title, :description, :status, :deadline)
-  #   end
+  # Use callbacks to share common setup or constraints between actions.
+  # def set_task
+  #   @task = Task.find(params[:id])
+  # end
+
+  # Only allow a trusted parameter "white list" through.
+  def label_params
+    params.require(:label).permit(:name)
+  end
 end

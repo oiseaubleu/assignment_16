@@ -117,3 +117,14 @@ ja:
         butname: 更新する
       show:
         title: ユーザ詳細ページ
+  labels:
+    index:
+      title: ユーザ一覧ページ
+    new:
+      title: ユーザ登録ページ
+      butname: 登録する
+    edit:
+      title: ユーザ編集ページ
+      butname: 更新する
+    show:
+      title: ユーザ詳細ページ
