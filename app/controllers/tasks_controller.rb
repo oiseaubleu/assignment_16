@@ -56,7 +56,7 @@ class TasksController < ApplicationController
     if @task
     else
       flash[:danger] = 'アクセス権限がありません'
-      redirect_to tasks_path(current_user.id)
+      redirect_to tasks_path # (current_user.id)
     end
   end
 
