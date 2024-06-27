@@ -1,0 +1,50 @@
+<%= form_with(model: [:admin, user],local:true) do |f| %>
+    <% if user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+      <ul>
+        <% user.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="field">
+    <%= f.label :name %>
+    <div> </div>
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :email %>
+    <div> </div>
+    <%= f.email_field :email %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password %>
+    <div> </div>
+    <%= f.password_field :password %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password_confirmation %>
+    <div> </div>
+    <%= f.password_field :password_confirmation %>
+  </div>
+
+  <div class="field">
+    <%= f.label :admin_role %>
+    <div> </div>
+     <%= f.check_box :admin, id: :admin_role,:as => :boolean%>
+  </div>
+
+  <div> </div>
+  <div class="actions">
+    <%= f.submit butname, id:id %>
+  </div>
+
+<% end %>
+
+
