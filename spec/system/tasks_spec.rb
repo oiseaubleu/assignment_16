@@ -135,6 +135,13 @@ RSpec.describe 'タスク管理機能', type: :system do
       context 'ラベルで検索をした場合' do
         it 'そのラベルの付いたタスクがすべて表示される' do
           # toとnot_toのマッチャを使って表示されるものとされないものの両方を確認する
+          task0 = FactoryBot.create(:task, content: 'content1', created_at: Time.zone.now, user_id: user.id)
+          task1 = FactoryBot.create(:task, content: 'content2', created_at: Time.zone.now, user_id: user.id)
+          label0 = FactoryBot.create(:label, user_id: user.id)
+          label2 = FactoryBot.create(:second_label, user_id: user.id)
+          task2 = FactoryBot.create(:task, user_id: user.id) do |task|
+            FactoryBot.create_list(:label, 1, tasks: [task], user_id: user.id)
+          end
           5.times do |t|
             Task.create(title: "task_title_#{t + 2}", content: "task_content_#{t + 2}", deadline_on: Date.today,
                         priority: 0, status: 0, user_id: user.id)
@@ -143,10 +150,10 @@ RSpec.describe 'タスク管理機能', type: :system do
             task.labels << label_created_by_user
           end
           visit tasks_path
-          sleep 0.5
+
           find('select[name="search[label]"]').find("option[value='#{label_created_by_user.id}']").select_option
           click_button '検索'
-          sleep 0.5
+
           expect(page).to have_content 'task_title_7'
           expect(page).to have_content 'task_title_8'
           expect(page).to have_content 'task_title_9'
