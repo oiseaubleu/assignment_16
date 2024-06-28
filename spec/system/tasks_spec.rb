@@ -4,7 +4,7 @@ RSpec.describe 'タスク管理機能', type: :system do
   # ユーザのテストデータを作成
   let!(:user) { FactoryBot.create(:user) }
   let!(:user_second) { FactoryBot.create(:user_second) }
-
+  let!(:label_created_by_user) { Label.create(name: 'label_name', user_id: user.id) }
   before do
     visit new_session_path
     find('input[name="session[email]"]').set(user.email)
@@ -135,22 +135,45 @@ RSpec.describe 'タスク管理機能', type: :system do
       context 'ラベルで検索をした場合' do
         it 'そのラベルの付いたタスクがすべて表示される' do
           # toとnot_toのマッチャを使って表示されるものとされないものの両方を確認する
-
-          task0 = FactoryBot.create(:task, content: 'content1', created_at: Time.zone.now, user_id: user.id)
-          task1 = FactoryBot.create(:task, content: 'content2', created_at: Time.zone.now, user_id: user.id)
-          label0 = FactoryBot.create(:label, user_id: user.id)
-          label2 = FactoryBot.create(:second_label, user_id: user.id)
-          task2 = FactoryBot.create(:task, user_id: user.id) do |task|
-            FactoryBot.create_list(:label, 1, tasks: [task], user_id: user.id)
+          5.times do |t|
+            Task.create(title: "task_title_#{t + 2}", content: "task_content_#{t + 2}", deadline_on: Date.today,
+                        priority: 0, status: 0, user_id: user.id)
+            task = Task.create(title: "task_title_#{t + 7}", content: "task_content_#{t + 7}", deadline_on: Date.today,
+                               priority: 0, status: 0, user_id: user.id)
+            task.labels << label_created_by_user
           end
-          # binding.irb
-          # FactoryBot.create(:labels_tasks, task: task0, label: label0)
-          # FactoryBot.create(:labels_tasks, task: task1, label: label2)
           visit tasks_path
+          sleep 0.5
           find('select[name="search[label]"]').find("option[value='#{label_created_by_user.id}']").select_option
           click_button '検索'
-          expect(page).to have_content '企画書を作成する。'
-          expect(page).not_to have_content 'content2'
+          sleep 0.5
+          expect(page).to have_content 'task_title_7'
+          expect(page).to have_content 'task_title_8'
+          expect(page).to have_content 'task_title_9'
+          expect(page).to have_content 'task_title_10'
+          expect(page).to have_content 'task_title_11'
+          expect(page).not_to have_content 'task_title_2'
+          expect(page).not_to have_content 'task_title_3'
+          expect(page).not_to have_content 'task_title_4'
+          expect(page).not_to have_content 'task_title_5'
+          expect(page).not_to have_content 'task_title_6'
+
+          # task0 = FactoryBot.create(:task, content: 'content1', created_at: Time.zone.now, user_id: user.id)
+          # task1 = FactoryBot.create(:task, content: 'content2', created_at: Time.zone.now, user_id: user.id)
+          # label0 = FactoryBot.create(:label, user_id: user.id)
+          # label2 = FactoryBot.create(:second_label, user_id: user.id)
+          # task2 = FactoryBot.create(:task, user_id: user.id) do |task|
+          #   FactoryBot.create_list(:label, 1, tasks: [task], user_id: user.id)
+          # end
+          # # binding.irb
+          # visit tasks_path
+          # find('select[name="search[label]"]').find("option[value='#{label_created_by_user.id}']").select_option
+          # click_button '検索'
+
+          # # find('select[name="search[label]"]').find("option[value='#{ここに入れたかった}']").select_option
+          # # find('select[name="search[label]"]').find("option[value='#{label.id}']").select_option
+          # expect(page).to have_content '企画書を作成する。'
+          # expect(page).not_to have_content 'content2'
         end
       end
     end
