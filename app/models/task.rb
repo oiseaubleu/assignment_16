@@ -17,7 +17,7 @@ class Task < ApplicationRecord
 
   scope :status_search, ->(status) { where(status:) if status.present? }
   scope :title_search, ->(part) { where('title like ?', "%#{part}%") if part.present? }
-  scope :label_search, ->(label) { joins(:labels).where(labels: { name: label }) if label.present? }
+  scope :label_search, ->(label) { joins(:labels).where(labels: { id: label }) if label.present? }
   scope :latest_deadline, ->(sort_deadline_on) { order(deadline_on: :asc) if sort_deadline_on }
   scope :highest_priority, ->(sort_priority) { order(priority: :desc) if sort_priority }
   # デフォルトスコープみたいのがあるらしいけど・・

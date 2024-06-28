@@ -34,7 +34,7 @@ class TasksController < ApplicationController
 
   def update
     if @task.update(task_params)
-      binding.irb
+      #  binding.irb
       flash[:notice] = t('.updated')
       redirect_to @task # 詳細画面へ
     else

@@ -47,10 +47,7 @@
   <div class="field">
       <%= form.label :label %>
     <div> </div>
-    <% current_user.labels.each do |label| %>
-      <%= form.check_box :label_ids, { multiple: true, include_hidden: false }, label[:id]%>
-      <%= label.name %>
-    <% end %>
+   <%= form.collection_check_boxes(:label_ids, current_user.labels, :id, :name) %>
   </div>
 
 <div> </div>
@@ -58,3 +55,4 @@
     <%= form.submit butname, class:'btn btn-sm btn-success',id:id %>
   </div>
 <% end %>
+
