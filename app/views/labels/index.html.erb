@@ -17,8 +17,8 @@
       <tr>
         <td><%= label.name %></td>
         <td><%= label.tasks.size %></td>
-        <td><%= link_to '編集', edit_label_path(label), class:"edit-label" %></td>
-        <td><%= link_to '削除', label_path(label), method: :delete, data:  { confirm: t('common.confirm_destroy')}, class:"destroy-label"%></td>
+        <td><%= link_to '編集', edit_label_path(label), class:"edit-label" "btn btn-sm btn-primary"%></td>
+        <td><%= link_to '削除', label_path(label), method: :delete, data:  { confirm: t('common.confirm_destroy')}, class:"destroy-label" "btn btn-sm btn-danger"%></td>
       </tr>
     <% end %>
   </tbody>

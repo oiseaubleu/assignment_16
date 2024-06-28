@@ -1,6 +1,4 @@
 <h1><%= t('.title') %></h1>
-
-
 <div class="search-form">
   <%= form_with(scope: :search, url: tasks_path, method: :get, local: true) do |f| %>
     <div class="field">
@@ -19,7 +17,7 @@
     </div>
 
     <div class="actions">
-      <%= f.submit t('helpers.submit.search'), id:'search_task' %>
+      <%= f.submit t('helpers.submit.search'), class:'btn btn-sm btn-primary',id:'search_task' %>
     </div>
   <% end %>
 </div>
@@ -49,9 +47,9 @@
         <td><%= task.deadline_on.strftime('%Y/%m/%d')  %></td>
         <td><%= Task.enum_options_for_select(:priority).key(task.priority) %></td>
         <td><%= Task.enum_options_for_select(:status).key(task.status) %></td>         
-        <td><%= link_to t('common.show'), task_path(task), class:"show-task" %></td>
-        <td><%= link_to t('common.edit'), edit_task_path(task), class:"edit-task" %></td>
-        <td><%= link_to t('common.destroy'), task, method: :delete, data:  { confirm: t('common.confirm_destroy')}, class:"destroy-task"%></td>
+        <td><%= link_to t('common.show'), task_path(task), class:"show-task" "btn btn-sm btn-primary" %></td>
+        <td><%= link_to t('common.edit'), edit_task_path(task), class:"edit-task" "btn btn-sm btn-primary" %></td>
+        <td><%= link_to t('common.destroy'), task, method: :delete, data:  { confirm: t('common.confirm_destroy')}, class:"destroy-task"  "btn btn-sm btn-danger"%></td>
       </tr>
     <% end %>
   </tbody>
