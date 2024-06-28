@@ -24,7 +24,7 @@
 
 
 
-<table>
+<table class="table">
   <thead>
     <tr>
       <th><%= Task.human_attribute_name(:title) %></th>
@@ -34,7 +34,7 @@
       <th><%= link_to Task.human_attribute_name(:priority), sort_priority: true,search: @search_params %></th>
       <th><%= Task.human_attribute_name(:status) %></th>
       
-      <th colspan="7"></th>
+      <th colspan="9"></th>
     </tr>
   </thead>
 
