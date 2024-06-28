@@ -30,7 +30,8 @@ ja:
       user/admin:
         true: あり
         false: なし
-
+      label:
+        name: 名前
       # admin/users:
       #   #   name: 名前
       #   email: メールアドレス??

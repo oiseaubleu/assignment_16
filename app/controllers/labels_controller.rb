@@ -3,16 +3,17 @@ class LabelsController < ApplicationController
 
   # GET /tasks
   def index
-    @labels = Label.all
+    @labels = current_user.labels #= Label.all
   end
 
-  # # GET /tasks/1
-  # def show
-  # end
+  # GET /tasks/1
+  def show
+  end
 
   # GET /tasks/new
   def new
-    @label = Label.new
+    # @label = Label.new
+    @label = current_user.labels.build
   end
 
   # GET /tasks/1/edit
@@ -21,8 +22,8 @@ class LabelsController < ApplicationController
 
   # POST /tasks
   def create
-    @label = Label.new(label_params)
-
+    # @label = Label.new(label_params)
+    @label = current_user.labels.build(label_params)
     if @label.save
       flash[:info] = 'ラベルを登録しました'
       redirect_to labels_path
@@ -52,7 +53,14 @@ class LabelsController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_label
-    @label = Label.find(params[:id])
+    # @label = Label.find(params[:id])
+    @label = current_user.labels.find_by(id: params[:id])
+    if @label
+    else
+      flash[:danger] = 'アクセス権限がありません'
+      redirect_to labels_path # (current_user.id)
+    end
+    # @label = current_user.tasks.find(params[:id])
   end
 
   # Only allow a trusted parameter "white list" through.
