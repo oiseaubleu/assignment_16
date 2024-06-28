@@ -15,7 +15,7 @@
 
     <div class="field">
       <%= 'ラベル' %>
-      <%= f.select :label , Label.all.collect { |label| label.name },{include_blank: ''},selected: @search_params[:label] %>
+      <%= f.select :label , current_user.labels.collect { |label| label.name },{include_blank: ''},selected: @search_params[:label] %>
     </div>
 
     <div class="actions">
