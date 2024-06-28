@@ -11,6 +11,7 @@ ja:
         deadline_on: 終了期限
         priority: 優先度
         status: ステータス
+        label: ラベル
       task/priority:
         low: 低
         middle: 中

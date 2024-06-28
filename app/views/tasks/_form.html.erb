@@ -45,7 +45,7 @@
   
 
   <div class="field">
-      <%= form.label 'ラベル' %>
+      <%= form.label :label %>
     <div> </div>
     <% current_user.labels.each do |label| %>
       <%= form.check_box :label_ids, { multiple: true, include_hidden: false }, label[:id]%>
