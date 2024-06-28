@@ -31,7 +31,7 @@
          <li class="nav-item"><%= link_to t('common.sign_out'), session_path(current_user.id), method: :delete, class: 'nav-link',id:"sign-out"%></li>
         </ul>
       <% else %>
-        <ul>       
+        <ul class="navbar-nav ml-auto">       
          <li class="nav-item"><%= link_to t('common.sign_up'), new_user_path,class: 'nav-link',id:"sign-up"%></li>
          <li class="nav-item"><%= link_to t('common.sign_in'), new_session_path,class: 'nav-link',id:"sign-in" %></li>
         </ul>
