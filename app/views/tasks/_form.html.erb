@@ -14,38 +14,45 @@
   <div class="field">
     <%= form.label :title%>
     <div> </div>
-    <%= form.text_field :title %>
+    <%= form.text_field :title , class:'form-control form-control-lg'%>
   </div>
 
   <div class="field">
     <%= form.label :content %>
     <div> </div>
-    <%= form.text_area :content %>
+    <%= form.text_area :content,class:'form-control form-control-lg' %>
   </div>
 
   <div class="field">
     <%= form.label :deadline_on %>
     <div> </div>
-    <%= form.date_field :deadline_on %>
+    <%= form.date_field :deadline_on,class:'form-control form-control-lg' %>
   </div>
 
   <div class="field">
     <%= form.label :priority %>
     <div> </div>
-    <%= form.select :priority,Task.enum_options_for_select(:priority),{include_blank: ''} %>
+    <%= form.select :priority,Task.enum_options_for_select(:priority),{include_blank: ''} ,class:'form-control form-control-lg'%>
   
   </div>
 
   <div class="field">
     <%= form.label :status %>
     <div> </div>
-    <%= form.select :status, Task.enum_options_for_select(:status) , {include_blank: ''} %> 
+    <%= form.select :status, Task.enum_options_for_select(:status) , {include_blank: ''},class:'form-control form-control-lg'%> 
       <%# Task.statuses.keys.to_a, から変更！%>
   </div>
+  
 
+  <div class="field">
+      <%= form.label :label %>
+    <div> </div>
+   <%= form.collection_check_boxes(:label_ids, current_user.labels, :id, :name) %>
+  </div>
 
 <div> </div>
   <div class="actions">
-    <%= form.submit butname, id:id %>
+    <%= form.submit butname, class:'btn btn-sm btn-success',id:id %>
   </div>
 <% end %>
+

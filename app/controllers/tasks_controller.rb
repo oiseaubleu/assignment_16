@@ -34,6 +34,7 @@ class TasksController < ApplicationController
 
   def update
     if @task.update(task_params)
+      #  binding.irb
       flash[:notice] = t('.updated')
       redirect_to @task # 詳細画面へ
     else
@@ -53,6 +54,9 @@ class TasksController < ApplicationController
     # @task = Task.find(params[:id])
     # もとはこれだけ@task = current_user.tasks.find(params[:id])
     @task = current_user.tasks.find_by(id: params[:id])
+    ###################################
+    # if @task　いらない　unless @taskでいい
+    ####################################
     if @task
     else
       flash[:danger] = 'アクセス権限がありません'
@@ -62,11 +66,11 @@ class TasksController < ApplicationController
 
   # コンテンツしか受け入れないようにするストロングパラメータ {"content"=>"xxx"}みたいな戻り値
   def task_params
-    params.require(:task).permit(:title, :content, :deadline_on, :priority, :status)
+    params.require(:task).permit(:title, :content, :deadline_on, :priority, :status, label_ids: [])
   end
 
   def search_params
-    params.fetch(:search, {}).permit(:title, :status)
+    params.fetch(:search, {}).permit(:title, :status, :label)
   end
 
   # def correct_user

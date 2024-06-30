@@ -3,4 +3,4 @@
 <%= render 'form', user: @user,  butname:t('.butname'),id:'update-user'%>
 
 
-<%= link_to  t('common.back'), user_path(@user.id) ,id:'back'%>
+<%= link_to  t('common.back'), user_path(@user.id) ,class: "btn btn-sm btn-success",id:'back'%>

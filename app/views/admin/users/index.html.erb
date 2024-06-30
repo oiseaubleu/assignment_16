@@ -30,9 +30,9 @@
         <td><%= user.email %></td>
         <td><%= User.human_attribute_name("admin.#{user.admin}")%></td>
         <td><%= user.tasks.size %></td>
-        <td><%= link_to t('common.show'), admin_user_path(user.id), class:"show-user" %></td>
-        <td><%= link_to t('common.edit'), edit_admin_user_path(user), class:"edit-user" %></td>
-        <td><%= link_to t('common.destroy'), admin_user_path(user), method: :delete, data:  { confirm: t('common.confirm_destroy')}, class:"destroy-user"%></td>
+        <td><%= link_to t('common.show'), admin_user_path(user.id), class:"show-user" "btn btn-sm btn-primary" %></td>
+        <td><%= link_to t('common.edit'), edit_admin_user_path(user), class:"edit-user" "btn btn-sm btn-primary"%></td>
+        <td><%= link_to t('common.destroy'), admin_user_path(user), method: :delete, data:  { confirm: t('common.confirm_destroy')}, class:"destroy-user" "btn btn-sm btn-danger"%></td>
       </tr>
     <% end %>
   <% else %>
